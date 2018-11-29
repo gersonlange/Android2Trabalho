@@ -1,6 +1,7 @@
 package br.inf.edge.suporte.visita.web;
 
 import android.content.Context;
+import android.util.Log;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
@@ -37,10 +38,11 @@ public class WebTaskLogin extends WebTaskBase{
 
     @Override
     public void handleResponse(String response) {
+
         Usuario user = new Usuario();
         try {
             JSONObject responseAsJSON = new JSONObject(response);
-            user.setNome(responseAsJSON.getString("name"));
+            user.setNome(responseAsJSON.getString("nome"));
             user.setToken(responseAsJSON.getString("token"));
             user.setUsuario(usuario);
 
@@ -50,6 +52,4 @@ public class WebTaskLogin extends WebTaskBase{
                     R.string.label_error_invalid_response)));
         }
     }
-
-
 }

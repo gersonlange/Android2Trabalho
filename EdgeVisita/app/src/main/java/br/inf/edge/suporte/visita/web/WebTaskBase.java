@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
@@ -23,9 +24,10 @@ import br.inf.edge.suporte.visita.R;
 public abstract class WebTaskBase extends AsyncTask<Void, Void, Void> {
 
     public static final int RESPONSE_OK = 200;
-    public static final int RESPONSE_INVALID_REQUEST = 403;
+    public static final int RESPONSE_INVALID_REQUEST = 401;
     private static int TIMEOUT = 15;
-    private static String BASE_URL = "http://localhost:8080/";
+//    private static String BASE_URL = "http://localhost:8080/visita/";
+    private static String BASE_URL = "http://192.168.100.51:8080/visita/";
 
     private String serviceURL;
     private Context context;
