@@ -3,7 +3,9 @@ package br.inf.edge.suporte.visita.dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +24,9 @@ public class DadosDAO {
             values.put("codigo", regiao.getCodigo());
             values.put("nome"  , regiao.getRegiao());
             values.put("data"  , regiao.getData());
-            values.put("observacao", regiao.getObservacao());
+
+            if ( regiao.getObservacao() != null)
+                values.put("observacao", regiao.getObservacao());
 
             db.insert("regioes", null, values);
         }
@@ -48,7 +52,11 @@ public class DadosDAO {
         db.close();
     }
 
-    public List<Regiao> getRegioes() {
+    public List<Regiao> getRegioes() throws Exception {
+
+        SimpleDateFormat dfiso = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+
         List<Regiao> regiaoList = new ArrayList<>();
 
         String selectQuery = "SELECT * FROM regioes";
@@ -61,7 +69,7 @@ public class DadosDAO {
                 regiao.setCodigo(Integer.parseInt(cursor.getString(cursor.getColumnIndex("codigo"))));
                 regiao.setRegiao(cursor.getString(cursor.getColumnIndex("nome")));
                 regiao.setObservacao(cursor.getString(cursor.getColumnIndex("observacao")));
-                regiao.setData(cursor.getString(cursor.getColumnIndex("data")));
+                regiao.setData( df.format( dfiso.parse(cursor.getString(cursor.getColumnIndex("data"))) ) );
 
                 regiaoList.add(regiao);
             } while (cursor.moveToNext());

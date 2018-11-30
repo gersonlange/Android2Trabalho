@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/item_cliente"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -15,7 +16,7 @@
         android:layout_margin="8dp"
         android:textStyle="bold"
         android:textColor="@color/colorPrimaryDark"
-        />
+        tools:text="Nome do cliente" />
 
     <TextView
         android:id="@+id/label_observacao"
@@ -24,12 +25,14 @@
         android:layout_below="@id/label_cliente"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="8dp"
+        tools:text="Observacao" />
 
     <TextView
         android:id="@+id/label_codigo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        tools:text="Codigo" />
 
 </RelativeLayout>

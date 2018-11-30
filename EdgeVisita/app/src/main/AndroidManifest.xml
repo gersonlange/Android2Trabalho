@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -13,9 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name="br.inf.edge.suporte.visita.features.login.LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait">
+        <activity
+            android:name=".features.login.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,28 +26,52 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="br.inf.edge.suporte.visita.features.regiao.RegiaoActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait">
-        </activity>
+        <activity
+            android:name=".features.regiao.RegiaoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity android:name="br.inf.edge.suporte.visita.features.cliente.ClienteActivity"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait">
+        <activity
+            android:name=".features.cliente.ClienteActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.inf.edge.suporte.visita.features.regiao.RegiaoActivity" />
         </activity>
 
-        <activity android:name="br.inf.edge.suporte.visita.features.visita.VisitaActivity"
-            android:theme="@style/AppTheme"
+        <activity
+            android:name=".features.visita.VisitaActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.inf.edge.suporte.visita.features.cliente.ClienteActivity" />
         </activity>
 
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".features.regiao.MapaActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.inf.edge.suporte.visita.features.regiao.RegiaoActivity" />
+        </activity>
     </application>
 
 </manifest>

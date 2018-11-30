@@ -1,8 +1,11 @@
 package br.inf.edge.visita.api.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import lombok.Getter;
 import lombok.Setter;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ClienteDTO {
 
 	@Setter @Getter

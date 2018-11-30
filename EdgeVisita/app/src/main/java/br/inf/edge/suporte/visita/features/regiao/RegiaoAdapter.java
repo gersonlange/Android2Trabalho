@@ -1,6 +1,7 @@
 package br.inf.edge.suporte.visita.features.regiao;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,11 +37,32 @@ public class RegiaoAdapter extends RecyclerView.Adapter<RegiaoViewHolder> {
     public void onBindViewHolder(RegiaoViewHolder holder, int position) {
         final Regiao regiao = regiaoList.get(position);
 
-        holder.labelCodigo.setText(Integer.toString(regiao.getCodigo()));
-        holder.labelRegiao.setText(regiao.getRegiao());
-        holder.labelData.setText(regiao.getData());
-        holder.labelObservacao.setText(regiao.getObservacao());
-        holder.codigoRegiao = regiao.getCodigo();
+        if ( regiao.getCodigo() > 0 ) {
+            holder.labelCodigo.setText(Integer.toString(regiao.getCodigo()));
+            holder.labelRegiao.setText(regiao.getRegiao());
+            holder.labelData.setText(regiao.getData());
+            holder.labelObservacao.setText(regiao.getObservacao());
+            holder.codigoRegiao = regiao.getCodigo();
+        }
+        else {
+            holder.tipoBotao = regiao.getTipoBotao();
+
+            if ( "mapa".equals(regiao.getTipoBotao()) ) {
+                holder.labelBotao.setText(context.getResources().getString(R.string.mapa));
+                holder.labelBotao.setTextColor(Color.WHITE);
+                holder.itemRegiao.setBackgroundColor(Color.BLUE);
+            }
+            else if ( "inicia".equals(regiao.getTipoBotao()) ) {
+                holder.labelBotao.setText(context.getResources().getString(R.string.inicia));
+                holder.labelBotao.setTextColor(Color.WHITE);
+                holder.itemRegiao.setBackgroundColor(Color.RED);
+            }
+            else if ( "termina".equals(regiao.getTipoBotao()) ) {
+                holder.labelBotao.setText(context.getResources().getString(R.string.termina));
+                holder.labelBotao.setTextColor(Color.WHITE);
+                holder.itemRegiao.setBackgroundColor(Color.RED);
+            }
+        }
     }
 
     @Override

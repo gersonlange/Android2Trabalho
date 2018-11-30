@@ -11,6 +11,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -94,6 +95,7 @@ public class RegiaoActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_regiao);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
+        recyclerView.setEnabled(false);
 
         recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(),
                 DividerItemDecoration.VERTICAL));
@@ -128,30 +130,57 @@ public class RegiaoActivity extends AppCompatActivity {
     private void atualizaDados(boolean forcar) {
         mSwipeRefreshLayout.setRefreshing(true);
 
-        List<Regiao> regioes = new DadosDAO().getRegioes();
+        try {
 
-        if ( forcar || regioes == null || regioes.size() == 0 ) {
+            List<Regiao> regioes = new DadosDAO().getRegioes();
 
-            if ( forcar )
-                Database.drop();
+            if (forcar || regioes == null || regioes.size() == 0) {
 
-            WebTaskDados taskDados = new WebTaskDados(this, new Session(this).get(Session.USUARIO_TOKEN));
-            taskDados.execute();
-        } else {
-            setDados(regioes);
+                if (forcar)
+                    Database.drop();
+
+                WebTaskDados taskDados = new WebTaskDados(this, new Session(this).get(Session.USUARIO_TOKEN));
+                taskDados.execute();
+            } else {
+                setDados(regioes);
+            }
+        }
+        catch (Exception e)
+        {
+            Log.e("ERROR", e.getMessage(), e);
         }
 
         mSwipeRefreshLayout.setRefreshing(false);
     }
 
     public void setDados(List<Regiao> regioes) {
-        if ( regioes == null || regioes.size() == 0 ) {
+
+        List<Regiao> dados = new ArrayList<>();
+
+        if ( regioes != null && regioes.size() > 0 ) {
+            Regiao regiao = new Regiao();
+            regiao.setTipoBotao("mapa");
+            dados.add(regiao);
+
+            regiao = new Regiao();
+            regiao.setTipoBotao("inicia");
+            dados.add(regiao);
+
+            for (Regiao r : regioes)
+                dados.add(r);
+
+            regiao = new Regiao();
+            regiao.setTipoBotao("termina");
+            dados.add(regiao);
+        }
+
+        if ( dados == null || dados.size() == 0 ) {
             findViewById(R.id.container_empty).setVisibility(View.VISIBLE);
             findViewById(R.id.swipe_regiao).setVisibility(View.GONE);
         } else {
             findViewById(R.id.swipe_regiao).setVisibility(View.VISIBLE);
             findViewById(R.id.container_empty).setVisibility(View.GONE);
-            adapter.regiaoList = regioes;
+            adapter.regiaoList = dados;
             adapter.notifyDataSetChanged();
         }
     }
@@ -159,11 +188,18 @@ public class RegiaoActivity extends AppCompatActivity {
     @Subscribe
     public void onEvent(Dados dados) {
 
-        DadosDAO dao = new DadosDAO();
-        dao.insertRegiao(dados.getRegioes());
-        dao.insertCliente(dados.getClientes());
+        try
+        {
+            DadosDAO dao = new DadosDAO();
+            dao.insertRegiao(dados.getRegioes());
+            dao.insertCliente(dados.getClientes());
 
-        setDados(dao.getRegioes());
+            setDados(dao.getRegioes());
+        }
+        catch (Exception e)
+        {
+            Log.e("ERROR", e.getMessage(), e);
+        }
     }
 
     @Subscribe
