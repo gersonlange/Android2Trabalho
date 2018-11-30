@@ -22,13 +22,13 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.inf.edge.android.visita.model.Regiao;
 import br.inf.edge.suporte.visita.R;
 import br.inf.edge.suporte.visita.dao.DadosDAO;
 import br.inf.edge.suporte.visita.data.Database;
 import br.inf.edge.suporte.visita.data.Session;
 import br.inf.edge.suporte.visita.features.login.LoginActivity;
 import br.inf.edge.suporte.visita.model.Dados;
+import br.inf.edge.suporte.visita.model.Regiao;
 import br.inf.edge.suporte.visita.web.WebTaskDados;
 
 public class RegiaoActivity extends AppCompatActivity {
@@ -155,32 +155,13 @@ public class RegiaoActivity extends AppCompatActivity {
 
     public void setDados(List<Regiao> regioes) {
 
-        List<Regiao> dados = new ArrayList<>();
-
-        if ( regioes != null && regioes.size() > 0 ) {
-            Regiao regiao = new Regiao();
-            regiao.setTipoBotao("mapa");
-            dados.add(regiao);
-
-            regiao = new Regiao();
-            regiao.setTipoBotao("inicia");
-            dados.add(regiao);
-
-            for (Regiao r : regioes)
-                dados.add(r);
-
-            regiao = new Regiao();
-            regiao.setTipoBotao("termina");
-            dados.add(regiao);
-        }
-
-        if ( dados == null || dados.size() == 0 ) {
+        if ( regioes == null || regioes.size() == 0 ) {
             findViewById(R.id.container_empty).setVisibility(View.VISIBLE);
             findViewById(R.id.swipe_regiao).setVisibility(View.GONE);
         } else {
             findViewById(R.id.swipe_regiao).setVisibility(View.VISIBLE);
             findViewById(R.id.container_empty).setVisibility(View.GONE);
-            adapter.regiaoList = dados;
+            adapter.regiaoList = regioes;
             adapter.notifyDataSetChanged();
         }
     }

@@ -1,6 +1,7 @@
 package br.inf.edge.suporte.visita.features.cliente;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,9 +37,26 @@ public class ClienteAdapter extends RecyclerView.Adapter<ClienteViewHolder> {
     public void onBindViewHolder(ClienteViewHolder holder, int position) {
         final Cliente cliente = clienteList.get(position);
 
-        holder.labelCliente.setText(cliente.getNome());
-        holder.labelObservacao.setText(cliente.getObservacao());
-        holder.codigoCliente = cliente.getCodigo();
+        if ( cliente.getTipoBotao() == null ) {
+            holder.labelCliente.setText(cliente.getNome());
+            holder.labelObservacao.setText(cliente.getObservacao());
+            holder.codigoCliente = cliente.getCodigo();
+            holder.tipoBotao = null;
+
+            holder.labelBotao.setText("");
+
+        } else {
+            holder.labelCliente.setText("");
+            holder.labelObservacao.setText("");
+            holder.codigoCliente = 0;
+            holder.codigoRegiao = cliente.getCodigoRegiao();
+
+            holder.tipoBotao = cliente.getTipoBotao();
+
+            if ( "mapa".equals(cliente.getTipoBotao()) ) {
+                holder.labelBotao.setText(context.getResources().getString(R.string.mapa));
+            }
+        }
     }
 
     @Override

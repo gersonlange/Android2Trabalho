@@ -46,7 +46,9 @@ public class Database extends SQLiteOpenHelper {
                                        "nome TEXT," +
                                        "endereco TEXT," +
                                        "observacao TEXT," +
-                                       "codigo_regiao INTEGER)");
+                                       "codigo_regiao INTEGER," +
+                                       "latitude double," +
+                                       "longitude double)");
 
         /*
          * Tabela Chamadas

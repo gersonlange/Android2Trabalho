@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import br.inf.edge.android.visita.model.Regiao;
 import br.inf.edge.suporte.visita.R;
+import br.inf.edge.suporte.visita.model.Regiao;
 
 public class RegiaoAdapter extends RecyclerView.Adapter<RegiaoViewHolder> {
 
@@ -37,32 +37,12 @@ public class RegiaoAdapter extends RecyclerView.Adapter<RegiaoViewHolder> {
     public void onBindViewHolder(RegiaoViewHolder holder, int position) {
         final Regiao regiao = regiaoList.get(position);
 
-        if ( regiao.getCodigo() > 0 ) {
-            holder.labelCodigo.setText(Integer.toString(regiao.getCodigo()));
-            holder.labelRegiao.setText(regiao.getRegiao());
-            holder.labelData.setText(regiao.getData());
-            holder.labelObservacao.setText(regiao.getObservacao());
-            holder.codigoRegiao = regiao.getCodigo();
-        }
-        else {
-            holder.tipoBotao = regiao.getTipoBotao();
+        holder.codigoRegiao = regiao.getCodigo();
 
-            if ( "mapa".equals(regiao.getTipoBotao()) ) {
-                holder.labelBotao.setText(context.getResources().getString(R.string.mapa));
-                holder.labelBotao.setTextColor(Color.WHITE);
-                holder.itemRegiao.setBackgroundColor(Color.BLUE);
-            }
-            else if ( "inicia".equals(regiao.getTipoBotao()) ) {
-                holder.labelBotao.setText(context.getResources().getString(R.string.inicia));
-                holder.labelBotao.setTextColor(Color.WHITE);
-                holder.itemRegiao.setBackgroundColor(Color.RED);
-            }
-            else if ( "termina".equals(regiao.getTipoBotao()) ) {
-                holder.labelBotao.setText(context.getResources().getString(R.string.termina));
-                holder.labelBotao.setTextColor(Color.WHITE);
-                holder.itemRegiao.setBackgroundColor(Color.RED);
-            }
-        }
+        holder.labelCodigo.setText(Integer.toString(regiao.getCodigo()));
+        holder.labelRegiao.setText(regiao.getRegiao());
+        holder.labelData.setText(regiao.getData());
+        holder.labelObservacao.setText(regiao.getObservacao());
     }
 
     @Override

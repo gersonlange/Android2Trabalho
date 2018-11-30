@@ -14,7 +14,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".features.login.LoginActivity"
             android:screenOrientation="portrait"
@@ -25,12 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".features.regiao.RegiaoActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".features.cliente.ClienteActivity"
             android:screenOrientation="portrait"
@@ -39,7 +36,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.inf.edge.suporte.visita.features.regiao.RegiaoActivity" />
         </activity>
-
         <activity
             android:name=".features.visita.VisitaActivity"
             android:screenOrientation="portrait"
@@ -64,14 +60,8 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".features.regiao.MapaActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="br.inf.edge.suporte.visita.features.regiao.RegiaoActivity" />
-        </activity>
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps"></activity>
     </application>
 
 </manifest>

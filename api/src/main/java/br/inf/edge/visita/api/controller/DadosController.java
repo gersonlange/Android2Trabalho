@@ -88,6 +88,8 @@ public class DadosController
 					clienteDto.setCodigo(c.getCodigo());
 					clienteDto.setNome(c.getNome());
 					clienteDto.setEndereco(c.getEndereco());
+					clienteDto.setLatitude(c.getLatitude());
+					clienteDto.setLongitude(c.getLongitude());
 
 					clientesDto.add(clienteDto);
 				}

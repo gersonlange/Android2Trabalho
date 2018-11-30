@@ -7,8 +7,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.inf.edge.android.visita.model.Regiao;
-
 public class Dados
 {
     private List<Regiao> regioes;
@@ -44,7 +42,9 @@ public class Dados
                     .setCodigo(clienteJson.getInt("codigo"))
                     .setNome(clienteJson.getString("nome"))
                     .setEndereco(clienteJson.getString("endereco"))
-                    .setCodigoRegiao(regiao.getCodigo());
+                    .setCodigoRegiao(regiao.getCodigo())
+                    .setLatitude(clienteJson.getDouble("latitude"))
+                    .setLongitude(clienteJson.getDouble("longitude"));
 
                 if ( clienteJson.has("observacao") )
                     cliente.setObservacao(clienteJson.getString("observacao"));

@@ -1,11 +1,11 @@
-package br.inf.edge.android.visita.model;
+package br.inf.edge.suporte.visita.model;
 
 import java.util.Date;
 import java.util.List;
 
 public class Regiao {
     private int codigo;
-    private String regiao, observacao, data, tipoBotao;
+    private String regiao, observacao, data;
 
     public String getObservacao() {
         return observacao;
@@ -37,13 +37,5 @@ public class Regiao {
 
     public void setData(String data) {
         this.data = data;
-    }
-
-    public void setTipoBotao(String tipoBotao) {
-        this.tipoBotao = tipoBotao;
-    }
-
-    public String getTipoBotao() {
-        return tipoBotao;
     }
 }

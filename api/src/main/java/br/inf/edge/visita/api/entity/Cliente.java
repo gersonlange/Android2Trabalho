@@ -27,4 +27,10 @@ public class Cliente {
 
 	@Setter @Getter
 	private long idRegiao;
+	
+	@Setter @Getter
+	private double latitude;
+	
+	@Setter @Getter
+	private double longitude;
 }

@@ -17,6 +17,7 @@ import br.inf.edge.suporte.visita.R;
 import br.inf.edge.suporte.visita.dao.DadosDAO;
 import br.inf.edge.suporte.visita.data.Session;
 import br.inf.edge.suporte.visita.model.Cliente;
+import br.inf.edge.suporte.visita.model.Regiao;
 
 public class ClienteActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -56,13 +57,26 @@ public class ClienteActivity extends AppCompatActivity {
 
         List<Cliente> clientes = new DadosDAO().getClientes( codigoRegiao );
 
-        if ( clientes == null || clientes.size() == 0 ) {
+        List<Cliente> dados = new ArrayList<>();
+
+        if ( clientes != null && clientes.size() > 0 ) {
+            Cliente cliente = new Cliente();
+            cliente.setTipoBotao("mapa");
+            cliente.setCodigoRegiao(codigoRegiao);
+            dados.add(cliente);
+
+            for (Cliente c : clientes)
+                dados.add(c);
+        }
+
+
+        if ( dados == null || dados.size() == 0 ) {
             findViewById(R.id.container_cliente_empty).setVisibility(View.VISIBLE);
             findViewById(R.id.recycler_cliente).setVisibility(View.GONE);
         } else {
             findViewById(R.id.recycler_cliente).setVisibility(View.VISIBLE);
             findViewById(R.id.container_cliente_empty).setVisibility(View.GONE);
-            adapter.clienteList = clientes;
+            adapter.clienteList = dados;
             adapter.notifyDataSetChanged();
        }
     }

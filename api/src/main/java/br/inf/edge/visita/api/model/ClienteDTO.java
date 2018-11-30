@@ -19,4 +19,10 @@ public class ClienteDTO {
 
 	@Setter @Getter
 	private String observacao;
+	
+	@Setter @Getter
+	private double latitude;
+	
+	@Setter @Getter
+	private double longitude;
 }

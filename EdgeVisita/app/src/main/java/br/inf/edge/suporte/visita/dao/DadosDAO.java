@@ -9,9 +9,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.inf.edge.android.visita.model.Regiao;
 import br.inf.edge.suporte.visita.data.Database;
 import br.inf.edge.suporte.visita.model.Cliente;
+import br.inf.edge.suporte.visita.model.Regiao;
 
 public class DadosDAO {
 
@@ -45,6 +45,8 @@ public class DadosDAO {
             values.put("endereco"  , cliente.getEndereco());
             values.put("observacao", cliente.getObservacao());
             values.put("codigo_regiao", cliente.getCodigoRegiao());
+            values.put("latitude", cliente.getLatitude());
+            values.put("longitude", cliente.getLongitude());
 
             db.insert("clientes", null, values);
         }
@@ -93,6 +95,10 @@ public class DadosDAO {
                 cliente.setEndereco(cursor.getString(cursor.getColumnIndex("endereco")));
                 cliente.setObservacao(cursor.getString(cursor.getColumnIndex("observacao")));
                 cliente.setCodigoRegiao(Integer.parseInt(cursor.getString(cursor.getColumnIndex("codigo_regiao"))));
+                cliente.setLatitude(cursor.getDouble(cursor.getColumnIndex("latitude")));
+                cliente.setLongitude(cursor.getDouble(cursor.getColumnIndex("longitude")));
+
+                Log.d("MAPA1", cliente.getLatitude() + " " +cliente.getLongitude());
 
                 clientesList.add(cliente);
             } while (cursor.moveToNext());

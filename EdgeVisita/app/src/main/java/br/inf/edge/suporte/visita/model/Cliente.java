@@ -7,7 +7,8 @@ import java.util.Date;
 
 public class Cliente {
     private int codigo, codigoRegiao;
-    private String nome, endereco, observacao;
+    private String nome, endereco, observacao, tipoBotao;
+    private double latitude, longitude;
 
     public int getCodigo() {
         return codigo;
@@ -54,22 +55,30 @@ public class Cliente {
         return this;
     }
 
-    public JSONObject getJson() {
-        try {
-            JSONObject json = new JSONObject();
-
-            json.put("codigo", codigo);
-            json.put("nome", nome);
-
-            if ( observacao != null )
-                json.put("observacao", observacao);
-
-            return json;
-        }
-        catch (JSONException exc) {
-
-        }
-
-        return null;
+    public double getLatitude() {
+        return latitude;
     }
+
+    public Cliente setLatitude(double latitude) {
+        this.latitude = latitude;
+        return this;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public Cliente setLongitude(double longitude) {
+        this.longitude = longitude;
+        return this;
+    }
+
+    public void setTipoBotao(String tipoBotao) {
+        this.tipoBotao = tipoBotao;
+    }
+
+    public String getTipoBotao() {
+        return tipoBotao;
+    }
+
 }
